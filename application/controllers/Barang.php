@@ -19,12 +19,6 @@ class Barang extends CI_Controller {
 	{
         $data['title']		= 'Data Barang';
 		$data['barang']		= $this->M_barang->get_barang()->result_array();
-		$data['jml_barang'] = $this->db->get('barang')->num_rows();
-		$assets = 0;
-		foreach ($data['barang'] as $a){
-		    $assets += $a['harga_beli'];
-		}
-		$data['total_assets'] = $assets;
 		$this->load->view('barang/data', $data);
 	}
 
@@ -37,11 +31,9 @@ class Barang extends CI_Controller {
 		} else {
 			$data		= $this->input->post(null, true);
 			$data_user	= [
-				'nama_bolu'			=> $data['nama_bolu'],
+				'nama_barang'			=> $data['nama_barang'],
 				'harga_beli'		=> $data['harga_beli'],
 				'harga_jual'		=> $data['harga_jual'],
-				'harga_jual_reseller_cash'		=> $data['harga_jual_reseller_cash'],
-				'harga_jual_reseller_tempo'		=> $data['harga_jual_reseller_tempo'],
 				'diskon'			=> $data['diskon'],
 				'ppn'				=> $data['ppn'],
 				'keterangan'		=> $data['keterangan'],
@@ -69,12 +61,10 @@ class Barang extends CI_Controller {
 			$data		= $this->input->post(null, true);
 			$data_user	= [
 				'id_barang'			=> $id_barang,
-				'nama_bolu'			=> $data['nama_bolu'],
+				'nama_barang'			=> $data['nama_barang'],
 				'stok'				=> $data['stok'],
 				'harga_beli'		=> $data['harga_beli'],
 				'harga_jual'		=> $data['harga_jual'],
-				'harga_jual_reseller_cash'		=> $data['harga_jual_reseller_cash'],
-				'harga_jual_reseller_tempo'		=> $data['harga_jual_reseller_tempo'],
 				'diskon'			=> $data['diskon'],
 				'ppn'				=> $data['ppn'],
 				'keterangan'		=> $data['keterangan'],
@@ -129,7 +119,7 @@ class Barang extends CI_Controller {
 
 			$data_cash	= [
 				'tanggal'			=> $data['tanggal'],
-				'keterangan'		=> 'Beli '.$get_stok['nama_bolu'].' sebanyak '.$data['jumlah'],
+				'keterangan'		=> 'Beli '.$get_stok['nama_barang'].' sebanyak '.$data['jumlah'],
 				'pengeluaran'		=> $data['jumlah']*$get_stok['harga_beli'],
 				'catatan'			=> '-',
 			];
@@ -242,13 +232,7 @@ class Barang extends CI_Controller {
 			$total = 0;
 			for ($i=0; $i < $x; $i++) { 
 				$barang = $this->M_barang->get_barang_by_id($data['id_barang'][$i]);
-				if($data['mode_jual'] == 'Harga Reseller Cash'){
-					$harga_jual = $barang['harga_jual_reseller_cash'];
-				}elseif($data['mode_jual'] == 'Harga Reseller Tempo'){
-					$harga_jual = $barang['harga_jual_reseller_tempo'];
-				} else {
-					$harga_jual = $barang['harga_jual'];
-				}
+				$harga_jual = $barang['harga_jual'];
 				$diskon = $data['jumlah'][$i]*($harga_jual * $barang['diskon'] / 100);
 				$subtotal = ($data['jumlah'][$i]*$harga_jual) - $diskon;
 				$data_penjualan_detail	= [
@@ -279,12 +263,12 @@ class Barang extends CI_Controller {
 			    'id_penjualan'   => $data['id_penjualan'],
 				'tanggal'			=> $data['tanggal'],
 				'harga_total'		=> $total,
-				'keterangan' => $data['mode_jual']
+				'keterangan' => $data['keterangan']
 			];
 
 			$data_cash	= [
 				'tanggal'			=> $data['tanggal'],
-				'keterangan'		=> 'Penjualan Bolu || '.$data['id_penjualan'],
+				'keterangan'		=> 'Penjualan Item || '.$data['id_penjualan'],
 				'pemasukan'		=> $total,
 				'catatan'			=> '-',
 			];
@@ -330,13 +314,7 @@ class Barang extends CI_Controller {
 			$barang = $this->M_barang->get_barang_by_id($data['id_barang']);
 			$trans = $this->M_barang->get_penjualan_by_id($id_penjualan);
 
-			if($trans['keterangan'] == 'Harga Reseller Cash'){
-				$harga_jual = $barang['harga_jual_reseller_cash'];
-			}elseif($trans['keterangan'] == 'Harga Reseller Tempo'){
-				$harga_jual = $barang['harga_jual_reseller_tempo'];
-			} else {
-				$harga_jual = $barang['harga_jual'];
-			}
+			$harga_jual = $barang['harga_jual'];
 			$diskon = $data['jumlah']*($harga_jual * $barang['diskon'] / 100);
 			$subtotal = ($data['jumlah']*$harga_jual) - $diskon;
 
@@ -404,13 +382,7 @@ class Barang extends CI_Controller {
 			$barang = $this->M_barang->get_barang_by_id($data['id_barang']);
 			$trans = $this->M_barang->get_penjualan_by_id($id_penjualan);
 
-			if($trans['keterangan'] == 'Harga Reseller Cash'){
-				$harga_jual = $barang['harga_jual_reseller_cash'];
-			}elseif($trans['keterangan'] == 'Harga Reseller Tempo'){
-				$harga_jual = $barang['harga_jual_reseller_tempo'];
-			} else {
-				$harga_jual = $barang['harga_jual'];
-			}
+			$harga_jual = $barang['harga_jual'];
 
 			$diskon = $data['jumlah']*($harga_jual * $barang['diskon'] / 100);
 			$subtotal = ($data['jumlah']*$harga_jual) - $diskon;
@@ -537,11 +509,9 @@ class Barang extends CI_Controller {
 
 	private function validation()
 	{
-		$this->form_validation->set_rules('nama_bolu', 'Nama Bolu', 'required|trim');
+		$this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required|trim');
 		$this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
 		$this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
-		$this->form_validation->set_rules('harga_jual_reseller_cash', 'Harga Jual Reseller Cash', 'required|numeric');
-		$this->form_validation->set_rules('harga_jual_reseller_tempo', 'Harga Jual Reseller Tempo', 'required|numeric');
 		$this->form_validation->set_rules('diskon', 'Diskon', 'numeric');
 		$this->form_validation->set_rules('ppn', 'PPn', 'numeric');
 		$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
@@ -644,7 +614,7 @@ class Barang extends CI_Controller {
         $printer->text("--------------------------------\n");
         $total = 0;
         foreach ($barang as $data) {
-            $printer->text(buatBaris4Kolom($data['nama_bolu'] , $data['jumlah'], number_format($data['harga_subtotal'], 0, ',', '.')));
+            $printer->text(buatBaris4Kolom($data['nama_barang'] , $data['jumlah'], number_format($data['harga_subtotal'], 0, ',', '.')));
         }
         
         $printer->text("--------------------------------\n");

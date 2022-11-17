@@ -31,7 +31,7 @@
                     <select class="form-control" name="id_barang" id="select-pegawai" data-live-search="true">
                       <option disabled selected>-- Pilih Barang --</option>
                       <?php foreach ($barang as $b):?>
-                      <option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_bolu'].' || Stok : '.$b['stok'] ?></option>
+                      <option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_barang'].' || Stok : '.$b['stok'] ?></option>
                       <?php endforeach;?>
                     </select>
                     <?= form_error('id_barang', '<span class="text-danger small">', '</span>'); ?>

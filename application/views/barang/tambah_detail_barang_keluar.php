@@ -26,7 +26,7 @@
                     <select class="form-control" name="id_barang" id="select-pegawai" data-live-search="true">
                       <option disabled selected>-- Pilih Barang --</option>
                       <?php foreach ($barang as $bar):?>
-                      <option value="<?= $bar['id_barang']?>" <?= set_value('id_barang') == $bar['id_barang'] ? 'selected' : '' ; ?> ><?= $bar['nama_bolu'].' || Stok : '.$bar['stok'] ?></option>
+                      <option value="<?= $bar['id_barang']?>" <?= set_value('id_barang') == $bar['id_barang'] ? 'selected' : '' ; ?> ><?= $bar['nama_barang'].' || Stok : '.$bar['stok'] ?></option>
                       <?php endforeach;?>
                     </select>
                     <?= form_error('id_barang', '<span class="text-danger small">', '</span>'); ?>

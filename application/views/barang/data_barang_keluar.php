@@ -30,7 +30,7 @@
                       <th>ID Transaksi</th>
                       <th>Tanggal</th>
                       <th>Total Harga</th>
-                      <th>Keterangan</th>
+                      <th>Atas Nama</th>
                       <th class="text-center">Aksi</th>
                     </tr>
                   </thead>

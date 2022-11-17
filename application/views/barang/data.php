@@ -23,22 +23,16 @@
             </div>
             
             <div class="card-body">
-              <!-- <div class="row">
-                  <div class="col-4"><h6>Total Assets</h6></div>
-                  <div class="col-8">: <?= 'Rp '.number_format($total_assets, 2, ',', '.'); ?></div>
-                  <div class="col-4"><h6>Total Stok</h6></div>
-                  <div class="col-8">: <?= $jml_barang ?> Unit</div>
-              </div> -->
                 
               <div class="table-responsive">
                 <table class="table table-striped" id="datatables-jabatan">
                   <thead>
                     <tr>
                       <th class="text-center">#</th>
-                      <th>Nama Bolu</th>
+                      <th>Nama Item</th>
                       <th>Stok</th>
                       <th>Harga Beli</th>
-                      <th colspan="2" class="text-center">Harga Jual</th>
+                      <th>Harga Jual</th>
                       <th>Diskon</th>
                       <th>PPN</th>
                       <th>Keterangan</th>
@@ -51,19 +45,10 @@
                     foreach($barang as $u):?>
                     <tr>
                       <td class="text-center"><?= $no++;?></td>
-                      <td><?= $u['nama_bolu'];?></td>
+                      <td><?= $u['nama_barang'];?></td>
                       <td><?= $u['stok'];?></td>
                       <td><?= 'Rp '.number_format($u['harga_beli'], 2, ',', '.');?></td>
-                      <td>
-                        Toko <br>
-                        Reseller (Cash)<br>
-                        Reseller (Tempo) 
-                      </td>
-                      <td>
-                        : <?= 'Rp '.number_format($u['harga_jual'], 2, ',', '.');?><br>
-                        : <?= 'Rp '.number_format($u['harga_jual_reseller_cash'], 2, ',', '.');?><br>
-                        : <?= 'Rp '.number_format($u['harga_jual_reseller_tempo'], 2, ',', '.');?>
-                      </td>
+                      <td><?= 'Rp '.number_format($u['harga_jual'], 2, ',', '.');?></td>
                       <td><?= $u['diskon'];?> %</td>
                       <td><?= $u['ppn'];?> %</td>
                       <td><?= $u['keterangan'];?></td>

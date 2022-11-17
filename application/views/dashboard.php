@@ -8,7 +8,7 @@
     </div>
 
     <div class="section-header">
-      <h6>Selamat Datang di Aplikasi Penjualan Bolu Kukus Siliwangi<br/><br/>
+      <h6>Selamat Datang di Aplikasi Penjualan RM Abah Cianjur<br/><br/>
       </h6>
 
     </div>

@@ -48,7 +48,7 @@
                     foreach($barang as $u):?>
                     <tr>
                       <td class="text-center"><?= $no++;?></td>
-                      <td><?= $u['nama_bolu'];?></td>
+                      <td><?= $u['nama_barang'];?></td>
                       <td><?= $u['jumlah'];?></td>
                       <td><?= 'Rp '.number_format($u['jumlah']*$u['harga_jual'], 2, ',', '.');?></td>
                       <td><?= 'Rp '.number_format($u['diskon'], 2, ',', '.');?></td>

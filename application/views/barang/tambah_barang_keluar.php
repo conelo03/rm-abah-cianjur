@@ -37,13 +37,9 @@
                   </div>
                   <div class="col-lg-4 form-group">
                     <div class="form-group">
-                      <label>Keterangan</label>
-                      <select name="mode_jual" class="form-control">
-                        <option selected="" value="Harga Jual Toko">Harga Jual Toko</option>
-                        <option value="Harga Reseller Cash">Harga Reseller Cash</option>
-                        <option value="Harga Reseller Tempo">Harga Reseller Tempo</option>
-                      </select>
-                      <?= form_error('mode_jual', '<span class="text-danger small">', '</span>'); ?>
+                      <label>Atas Nama</label>
+                      <input type="text" name="keterangan" class="form-control" value="<?= set_value('keterangan'); ?>" required="">
+                      <?= form_error('keterangan', '<span class="text-danger small">', '</span>'); ?>
                     </div>
                   </div>
                 </div> 
@@ -59,7 +55,7 @@
                     <select class="form-control" name="id_barang[]" id="" data-live-search="true">
                       <option disabled selected>-- Pilih Item --</option>
                       <?php foreach ($barang as $b):?>
-                      <option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_bolu'].' || Stok : '.$b['stok'] ?></option>
+                      <option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_barang'].' || Stok : '.$b['stok'] ?></option>
                       <?php endforeach;?>
                     </select>
                     <?= form_error('id_barang', '<span class="text-danger small">', '</span>'); ?>
@@ -89,7 +85,7 @@
 </div>
 <script type="text/javascript">
     function tambahItem(){
-    $(".form-item").append('<div class="col-lg-6 form-group"><select class="form-control" name="id_barang[]" id="" data-live-search="true"><option disabled selected>-- Pilih Item --</option><?php foreach ($barang as $b):?><option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_bolu'].' || Stok : '.$b['stok'] ?></option><?php endforeach;?></select><?= form_error('id_barang', '<span class="text-danger small">', '</span>'); ?></div><div class="col-lg-6 form-group"><input type="number" name="jumlah[]" class="form-control" value="<?= set_value('jumlah'); ?>" required=""><?= form_error('jumlah', '<span class="text-danger small">', '</span>'); ?></div>').children(':last');
+    $(".form-item").append('<div class="col-lg-6 form-group"><select class="form-control" name="id_barang[]" id="" data-live-search="true"><option disabled selected>-- Pilih Item --</option><?php foreach ($barang as $b):?><option value="<?= $b['id_barang']?>" <?= set_value('id_barang') == $b['id_barang'] ? 'selected' : '' ; ?> ><?= $b['nama_barang'].' || Stok : '.$b['stok'] ?></option><?php endforeach;?></select><?= form_error('id_barang', '<span class="text-danger small">', '</span>'); ?></div><div class="col-lg-6 form-group"><input type="number" name="jumlah[]" class="form-control" value="<?= set_value('jumlah'); ?>" required=""><?= form_error('jumlah', '<span class="text-danger small">', '</span>'); ?></div>').children(':last');
     
     }
 
